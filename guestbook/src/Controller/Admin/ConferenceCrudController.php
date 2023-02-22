@@ -23,7 +23,7 @@ class ConferenceCrudController extends AbstractCrudController
         return [
             IdField::new('id')->hideOnForm(),
             TextField::new('city'),
-            TextField::new('year'),
+            TextField::new('year')->setMaxLength(4),
             TextField::new('slug')->hideOnForm(),
             BooleanField::new('isInternational'),
         ];
