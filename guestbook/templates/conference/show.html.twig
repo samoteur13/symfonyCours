@@ -11,7 +11,7 @@
 			comments.</div>
 		{% for comment in comments %}
 			{% if comment.photofilename %}
-				<img src="{{ asset('uploads/photos/' ~ comment.photofilename) }}"/>
+				<img src="{{ asset('assets/uploads/photos/' ~ comment.photofilename) }}"/>
 			{% endif %}
 			<h4>{{ comment.author }}</h4>
 			<small>
@@ -22,7 +22,7 @@
 		<div class="d-flex justify-content-center">
 			<ul class="pagination pagination-sm">
 				{% if previous >= 0 %}
-					<li class="page-item disabled">
+					<li class="page-item ">
 						<a class="page-link" href="{{ path('conference', { slug: conference.slug, offset: previous }) }}">Previous</a>
 					</li>
 				{% endif %}
@@ -36,13 +36,7 @@
 	{% else %}
 		<div>No comments have been posted yet for this conference.</div>
 	{% endif %}
-	<article class="d-flex justify-content-center row">
-		<div class=" card border-danger mb-3" style="max-width: 30rem;">
-			<div class="card-header">Add your own feedback</div>
-			<div class="card-body">
-				{{ form(comment_form) }}
-				</div>
-			</div>
-		</div>
-	</article>
+	<div class="border border-primary p-2 m-5 rounded" >
+		{{ form(comment_form) }}
+	</div>
 {% endblock %}
