@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 
+use App\Entity\Comment;
+use App\Form\CommentFormType;
 use App\Entity\Conference;
 use App\Repository\CommentRepository;
 use App\Repository\ConferenceRepository;
@@ -29,12 +31,15 @@ class ConferenceController extends AbstractController
         {
             $offset = max(0, $request->query->getInt('offset', 0));
             $paginator = $commentRepository->getCommentPaginator($conference, $offset);
+            $comment = new Comment();
+            $form = $this->createForm(CommentFormType::class, $comment);
 
             return new Response($this->render('conference/show.html.twig', [
                 'conference' => $conference,
                  'comments' => $paginator,
                  'previous' => $offset - CommentRepository::PAGINATOR_PER_PAGE,
                  'next' => min(count($paginator), $offset + CommentRepository::PAGINATOR_PER_PAGE),
+                 'comment_form' => $form->createView(),
             ]));
     }
 }
