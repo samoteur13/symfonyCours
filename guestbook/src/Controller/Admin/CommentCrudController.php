@@ -54,7 +54,7 @@ class CommentCrudController extends AbstractCrudController
             'html5' => true,
             'years' => range(date('Y'), date('Y') + 5),
             'widget' => 'single_text',
-        ]);
+        ])->hideOnForm();
         if (Crud::PAGE_EDIT === $pageName) {
             yield $createdAt->setFormTypeOption('disabled', true);
         } else {
